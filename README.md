@@ -1,0 +1,3 @@
+# Android Retrofit Singleton
+
+TODO
