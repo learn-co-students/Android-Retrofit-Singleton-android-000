@@ -22,3 +22,28 @@ In this project, we will wrap building our RestAdapter into a singleton.
 
 Now that we have this set up, we can add new API methods simply by jumping into our BeatsAPI interface, and defining them.  There's no need to create a new Adapter.
 
+## Rest Adapter
+A simple query
+
+```java
+@GET("/api/artists")
+public void getArtists(
+    @Query("offset") Integer offset,
+    @Query("limit") Integer limit,
+    Callback<Base<Artist>> callback
+);
+```
+
+Rest Adapter
+
+```java
+RestAdapter restAdapter = new RestAdapter.Builder()
+    .setEndpoint(BeatsAPI.BASE_API)
+    .setRequestInterceptor(new RequestInterceptor() {
+        @Override
+        public void intercept(RequestFacade request) {
+            request.addQueryParam("client_id", BeatsAPI.CLIENT_ID);
+        }
+    })
+    .build();
+```
